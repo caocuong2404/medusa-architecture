@@ -1,0 +1,27 @@
+erDiagram
+    USER {
+        string id PK
+        string email UK
+        string first_name
+        string last_name
+        string password_hash
+        string api_token
+        string metadata
+        string role
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    INVITE {
+        string id PK
+        string user_email UK
+        string role
+        string token
+        boolean accepted
+        timestamp expires_at
+        timestamp created_at
+        timestamp updated_at
+        string metadata
+    }
+    
+    USER ||--o{ INVITE : receives
