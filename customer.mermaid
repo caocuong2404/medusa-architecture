@@ -1,0 +1,58 @@
+erDiagram
+    CUSTOMER {
+        string id PK
+        string email UK
+        boolean has_account
+        string password_hash
+        string first_name
+        string last_name
+        string phone
+        string metadata
+        string billing_address_id FK
+        timestamp created_at
+        timestamp updated_at
+        string created_by
+    }
+    
+    CUSTOMER_GROUP {
+        string id PK
+        string name UK
+        string metadata
+        timestamp created_at
+        timestamp updated_at
+        string created_by
+    }
+    
+    CUSTOMER_GROUP_CUSTOMERS {
+        string id PK
+        string customer_id FK
+        string customer_group_id FK
+        timestamp created_at
+        timestamp updated_at
+        string created_by
+        string metadata
+    }
+    
+    CUSTOMER_ADDRESS {
+        string id PK
+        string customer_id FK
+        string company
+        string first_name
+        string last_name
+        string address_1
+        string address_2
+        string city
+        string country_code
+        string province
+        string postal_code
+        string phone
+        string metadata
+        boolean is_default_shipping
+        boolean is_default_billing
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    CUSTOMER ||--o{ CUSTOMER_ADDRESS : has
+    CUSTOMER }|--o{ CUSTOMER_GROUP_CUSTOMERS : has
+    CUSTOMER_GROUP }|--o{ CUSTOMER_GROUP_CUSTOMERS : contains
