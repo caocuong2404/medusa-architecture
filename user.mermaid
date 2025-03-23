@@ -1,27 +1,18 @@
 erDiagram
     USER {
-        string id PK
-        string email UK
-        string first_name
-        string last_name
-        string password_hash
-        string api_token
-        string metadata
-        string role
-        timestamp created_at
-        timestamp updated_at
+        string id PK "prefix: user"
+        string first_name "nullable, searchable"
+        string last_name "nullable, searchable"
+        string email "searchable"
+        string avatar_url "nullable"
+        jsonb metadata "nullable"
     }
     
     INVITE {
         string id PK
-        string user_email UK
-        string role
-        string token
+        string email "Unique"
         boolean accepted
+        string token
         timestamp expires_at
-        timestamp created_at
-        timestamp updated_at
-        string metadata
+        jsonb metadata "nullable"
     }
-    
-    USER ||--o{ INVITE : receives
