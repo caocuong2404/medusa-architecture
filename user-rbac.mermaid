@@ -1,0 +1,40 @@
+erDiagram
+    USER {
+        string id PK "prefix: user"
+        string first_name
+        string last_name
+        string email
+        string avatar_url
+        jsonb metadata "Có thể lưu thông tin role"
+    }
+    
+    USER_ROLE {
+        string id PK
+        string name "superadmin|cskh3|cskh2|cskh1|intern"
+        string description
+    }
+    
+    USER_ROLE_ASSIGNMENT {
+        string id PK
+        string user_id FK
+        string role_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    PERMISSION {
+        string id PK
+        string name "order:view|customer:edit|etc"
+        string description
+    }
+    
+    ROLE_PERMISSION {
+        string id PK
+        string role_id FK
+        string permission_id FK
+    }
+    
+    USER ||--o{ USER_ROLE_ASSIGNMENT : has
+    USER_ROLE ||--o{ USER_ROLE_ASSIGNMENT : assigned_to
+    USER_ROLE ||--o{ ROLE_PERMISSION : has
+    PERMISSION ||--o{ ROLE_PERMISSION : belongs_to
